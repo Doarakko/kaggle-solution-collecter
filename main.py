@@ -38,7 +38,7 @@ def get_rank_and_medal(competition_results_df, user_name, target_competition_ref
 
         rank = row['rank'].iloc[0]
         medal = row['medal'].iloc[0]
-        logger.debug('[New Solution from already scraping] rank: {} medal: {}'.format(rank, medal))
+        logger.debug('[Already scraping] rank: {} medal: {}'.format(rank, medal))
 
         return competition_results_df, rank, medal
 
@@ -107,13 +107,11 @@ if __name__ == '__main__':
     solutions_df = solutions_df.assign(rank=-1)
     solutions_df = solutions_df.assign(medal=-1)
     solutions_df = solutions_df.assign(label=-1)
-    solutions_df = solutions_df.sort_index(ascending=False)
-
-    print(solutions_df)
 
     for idx, solution in solutions_df.iterrows():
         user_name = solution['user_name']
         competition_ref = solution['competition_ref']
+
         logger.debug('[Progress {} / {}] user_name: {} competition_ref: {}'.format(idx + 1, len(solutions_df), user_name, competition_ref))
         competition_results_df, rank, medal = get_rank_and_medal(competition_results_df, user_name, competition_ref)
 
