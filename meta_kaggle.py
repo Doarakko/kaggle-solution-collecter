@@ -15,8 +15,8 @@ import pandas as pd
 warnings.filterwarnings("ignore")
 
 pd.set_option("display.max_colwidth", 200)
-data_path = "input/meta-kaggle/"
-save_path = "output/"
+data_path = "data/meta-kaggle/"
+save_path = "data/"
 
 logger = getLogger(__name__)
 log_fmt = Formatter(
@@ -92,8 +92,9 @@ def get_solution_discussion(competition_slug, forum_id):
 
 def is_solution(title):
     is_solution = False
-    to_exclude = ["?", "submit", "why", "what", "resolution", "benchmark", "base", 'test', 'sample']
-    to_include = ['solution', 'place', 'private', 'gold', 'silver', 'bronze']
+    to_exclude = ["?", "submit", "why", "what", "resolution", "benchmark", "base", 'test', 'sample', 'probing', 'probe', 'split', 'between', 'distribution', 'vs', 'public/private',  'survey', 'leakage', 'difference', 'golden', 'replace', 'starter', 'leak', 'placement', 'simple', 'beginner', 'quick', 'fast', 'compact', 'basic']
+
+    to_include = ['solution', 'place', 'private', 'gold', 'silver', 'bronze', 'approach']
 
     for inc in to_include:
         if inc in title.lower():
@@ -216,7 +217,7 @@ logger.debug('Get {} solutions from meta kaggle'.format(len(solutions_df)))
 # In[21]:
 
 
-solutions_df.to_csv(save_path + 'solutions.csv')
+solutions_df.to_csv(data_path  + 'solutions.csv')
 logger.debug('Save')
 
 
